@@ -1,37 +1,69 @@
-﻿# イベントの記述方法
+﻿Add-Type -AssemblyName System.Windows.Forms
 
-# アセンブリのロード
-Add-Type -AssemblyName System.Windows.Forms
-
-# フォーム
+# Load Form
 $form = New-Object System.Windows.Forms.Form
-$form.Size = "250,200"
-$form.startposition = "centerscreen"
-$form.text = "イベント"
+$form.Size = "400,350"
+#$form.startposition = "centerscreen"
+$form.text = "Tool Kit"
 $form.MaximizeBox = $false
 $form.MinimizeBox = $false
 
-# ボタンA
-$ButtonA = New-Object System.Windows.Forms.Button
-$ButtonA.Location = "50,20"
-$ButtonA.size = "80,30"
-$ButtonA.text  =　"ボタンA"
-$ButtonA.FlatStyle = "popup"
-$form.Controls.Add($ButtonA)
-
-# ボタンAのクリックイベント
-$ButtonA.Add_Click({[System.Windows.Forms.MessageBox]::Show("ボタンAが押されました", "結果")})
 
 # ラベル
-$Label = New-Object System.Windows.Forms.Label
-$Label.Location = "20,80"
-$Label.Text = "この文字列をダブルクリック"
-$Label.BackColor = "lightgreen"
-$Label.AutoSize = $True
-$form.Controls.Add($Label)
+$Label1 = New-Object System.Windows.Forms.Label
+$Label1.Location = "10,60"
+$Label1.Text = "MailAddress or Name"
+$Label1.AutoSize = $True
+$form.Controls.Add($Label1)
+
+$textBox1 = New-Object System.Windows.Forms.TextBox
+$textBox1.Location = New-Object System.Drawing.Point(140,60)
+$textBox1.Size = New-Object System.Drawing.Size(225,50)
+$form.Controls.Add($textBox1)
+
+$Label2 = New-Object System.Windows.Forms.Label
+$Label2.Location = "10,90"
+$Label2.Text = "Hostname"
+$Label2.AutoSize = $True
+$form.Controls.Add($Label2)
+
+$textBox2 = New-Object System.Windows.Forms.TextBox
+$textBox2.Location = New-Object System.Drawing.Point(140,90)
+$textBox2.Size = New-Object System.Drawing.Size(225,50)
+$form.Controls.Add($textBox2)
+
+#$Label3 = New-Object System.Windows.Forms.Label
+#$Label3.Location = "10,120"
+#$Label3.Text = "aa"
+#$Label3.AutoSize = $True
+#$form.Controls.Add($Label3)
+$OutputBox = New-Object System.Windows.Forms.TextBox
+$OutputBox.Location = New-Object System.Drawing.Size(10,120)
+$OutputBox.Size = New-Object System.Drawing.Size(225,100)
+$OutputBox.MultiLine = $True
+$OutputBox.ReadOnly = $True
+#$OutputBox.ScrollBars = "Vertical"
+$form.Controls.Add($outputBox)
+
+
+# ボタンA
+$ButtonA = New-Object System.Windows.Forms.Button
+$ButtonA.Location = "10,10"
+$ButtonA.size = "80,30"
+$ButtonA.text  =　"OK"
+$ButtonA.Add_Click({GetData})
+$form.Controls.Add($ButtonA)
+
+function GetData{
+    #$output = (Get-Host).Version.ToString()
+    $output = Get-Host | Select-Object Version | Out-String
+    $outputBox.Text = $output
+
+}
 
 # ラベルのダブルクリックイベント
-$Label.Add_DoubleClick({[System.Windows.Forms.MessageBox]::Show("ダブルクリックされました", "結果")})
+#$Label.Add_DoubleClick({[System.Windows.Forms.MessageBox]::Show("ダブルクリックされました", "結果")})
 
 # フォームの表示
-$form.Showdialog()
+$form.Add_Shown({$form.Activate()})
+[void]$form.ShowDialog()
