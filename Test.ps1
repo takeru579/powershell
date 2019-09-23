@@ -34,4 +34,4 @@ $form.Controls.Add($Label)
 $Label.Add_DoubleClick({[System.Windows.Forms.MessageBox]::Show("ダブルクリックされました", "結果")})
 
 # フォームの表示
-$ｆorm.Showdialog()
+$form.Showdialog()
