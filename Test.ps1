@@ -8,8 +8,7 @@ $form.text = "Tool Kit"
 $form.MaximizeBox = $false
 $form.MinimizeBox = $false
 
-
-# ラベル
+# Label1 
 $Label1 = New-Object System.Windows.Forms.Label
 $Label1.Location = "10,60"
 $Label1.Text = "MailAddress or Name"
@@ -32,21 +31,15 @@ $textBox2.Location = New-Object System.Drawing.Point(140,90)
 $textBox2.Size = New-Object System.Drawing.Size(225,50)
 $form.Controls.Add($textBox2)
 
-#$Label3 = New-Object System.Windows.Forms.Label
-#$Label3.Location = "10,120"
-#$Label3.Text = "aa"
-#$Label3.AutoSize = $True
-#$form.Controls.Add($Label3)
+# Output info
 $OutputBox = New-Object System.Windows.Forms.TextBox
 $OutputBox.Location = New-Object System.Drawing.Size(10,120)
 $OutputBox.Size = New-Object System.Drawing.Size(225,100)
 $OutputBox.MultiLine = $True
 $OutputBox.ReadOnly = $True
-#$OutputBox.ScrollBars = "Vertical"
 $form.Controls.Add($outputBox)
 
-
-# ボタンA
+# Button
 $ButtonA = New-Object System.Windows.Forms.Button
 $ButtonA.Location = "10,10"
 $ButtonA.size = "80,30"
@@ -55,15 +48,12 @@ $ButtonA.Add_Click({GetData})
 $form.Controls.Add($ButtonA)
 
 function GetData{
-    #$output = (Get-Host).Version.ToString()
-    $output = Get-Host | Select-Object Version | Out-String
+    $output = (Get-Host).Version.ToString()
+    #$output = Get-Host | Select-Object Version | Out-String
     $outputBox.Text = $output
 
 }
 
-# ラベルのダブルクリックイベント
-#$Label.Add_DoubleClick({[System.Windows.Forms.MessageBox]::Show("ダブルクリックされました", "結果")})
-
-# フォームの表示
+# show form
 $form.Add_Shown({$form.Activate()})
 [void]$form.ShowDialog()
