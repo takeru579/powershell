@@ -2,11 +2,12 @@
 
 # Load Form
 $form = New-Object System.Windows.Forms.Form
-$form.Size = "400,350"
+$form.Size = "392,270"
 #$form.startposition = "centerscreen"
 $form.text = "Tool Kit"
-$form.MaximizeBox = $false
-$form.MinimizeBox = $false
+$form.MaximizeBox = $False
+$form.MinimizeBox = $False
+$form.FormBorderStyle = "FixedSingle"
 
 # Label1 
 $Label1 = New-Object System.Windows.Forms.Label
@@ -34,7 +35,7 @@ $form.Controls.Add($textBox2)
 # Output info
 $OutputBox = New-Object System.Windows.Forms.TextBox
 $OutputBox.Location = New-Object System.Drawing.Size(10,120)
-$OutputBox.Size = New-Object System.Drawing.Size(225,100)
+$OutputBox.Size = New-Object System.Drawing.Size(355,100)
 $OutputBox.MultiLine = $True
 $OutputBox.ReadOnly = $True
 $form.Controls.Add($outputBox)
